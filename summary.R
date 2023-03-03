@@ -14,46 +14,42 @@ average_checkouts_per_Austen_book <- all_checkouts %>%
   group_by(Title) %>%
   summarize(avg_checkouts = mean(Checkouts, na.rm = TRUE))
 
-View(average_checkouts_per_Austen_book)
+average_checkouts_per_Austen_book
 
 # Month with the most checkouts for the eBook copy of "Emma"
 most_checkouts_for_emma_ebook <- all_checkouts %>%
-  filter(Creator == "Jane Austen") %>%
-  filter(UsageClass == "Digital") %>%
-  filter(Title == "Emma") %>%
-  filter(Checkouts == max(Checkouts, na.rm = TRUE)) %>%
+  filter(Creator == "Jane Austen", UsageClass == "Digital", Title == "Emma") %>%
   group_by(CheckoutMonth) %>%
+  summarize(max_checkouts = max(Checkouts, na.rm = TRUE)) %>%
+  filter(max_checkouts == max(max_checkouts)) %>%
   pull(CheckoutMonth)
 
 most_checkouts_for_emma_ebook
 
 # Month with the most checkouts for the print copy of "Emma"
 most_checkouts_for_emma_print <- all_checkouts %>%
-  filter(Creator == "Jane Austen") %>%
-  filter(UsageClass == "Physical") %>%
-  filter(Title == "Emma") %>%
-  filter(Checkouts == max(Checkouts, na.rm = TRUE)) %>%
+  filter(Creator == "Jane Austen" & UsageClass == "Physical" & Title == "Emma") %>%
   group_by(CheckoutMonth) %>%
-  pull(CheckoutMonth).
+  summarize(max_checkouts = max(Checkouts, na.rm = TRUE)) %>%
+  filter(max_checkouts == max(max_checkouts)) %>%
+  pull(CheckoutMonth)
 
 most_checkouts_for_emma_print
 
 # Checkout Year for the least checkouts for the book "Lady Susan"
-least_checkouts_for_lady_susan <- all_checkouts %>%
-  filter(Creator == "Jane Austen") %>%
-  filter(Title == "Lady Susan") %>%
-  filter(Checkouts == min(Checkouts, na.rm = TRUE)) %>%
+least_checkouts_for_lady_susan <- five_checkouts %>%
+  filter(Creator == "Jane Austen" & Title == "Lady Susan") %>%
   group_by(CheckoutYear) %>%
+  summarize(min_checkouts = min(Checkouts, na.rm = TRUE)) %>%
+  filter(min_checkouts == min(min_checkouts)) %>%
   pull(CheckoutYear)
 
-View(least_checkouts_for_lady_susan)
+least_checkouts_for_lady_susan
 
-# Number of print book checkouts from 2022 to 2023
+# Number of total Emma checkouts from 2022 to 2023
 emma_print_checkouts <- all_checkouts %>%
-  group_by('Title') %>%
-  filter(Creator == "Jane Austen") %>%
-  filter(Title == "Emma") %>%
-  count(Title)
-  
-View(emma_print_checkouts)
-  
+  filter(Creator == "Jane Austen" & Title == "Emma" & CheckoutYear >= 2022 & CheckoutYear <= 2023) %>%
+  group_by(Title) %>%
+  summarize(total_checkouts = sum(Checkouts))
+
+emma_print_checkouts
