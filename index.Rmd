@@ -9,14 +9,17 @@ knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(tidyverse)
 library(dplyr)
+library(stringr)
+library(plotly)
 
 five_checkouts <- read.csv("~/Documents/Info201code/a3-spl-checkouts-anikalsurapaneni/2013-2023-5-Checkouts-SPL.csv")
+ten_checkouts <- read.csv("~/Documents/Info201code/a3-spl-checkouts-anikalsurapaneni/2017-2023-10-Checkouts-SPL-Data.csv")
 all_checkouts <- read.csv("~/Documents/Info201code/a3-spl-checkouts-anikalsurapaneni/2022-2023-All-Checkouts-SPL-Data.csv")
 ```
 
 ### Introduction
 
-Using data from the Seattle Public Library, I will observe trends in Jane Austen's book checkouts from three datasets: (1) a dataset of all checkouts from 2022-2023 (``all_checkouts``), (2) a dataset of items checked out at least 10 times a month from 2017-2023 (``ten_checkouts``), and (3) a dataset of items checked out at least 5 times a month from 2013-2023 (``five_checkouts``). I also plan on analyzing the checkout patterns in the average number of checkouts (``average_checkouts_per_Austen_book``), checkout data for specific books and its format-class during certain months (``most_checkouts_for_emma_ebook``, ``most_checkouts_for_emma_print``), year with the least number of checkouts for a book (``least_checkouts_for_lady_susan``), and total Emma checkouts from 2022 to 2023 (``emma_print_checkouts``). By looking at checkout data for certain books, I hope to gain insight into the popularity of Austen's most famous works in relation to time.
+Using data from the Seattle Public Library, I will observe trends in Jane Austen's book checkouts from three datasets: (1) a dataset of all checkouts from 2022-2023 (``all_checkouts``), (2) a dataset of items checked out at least 10 times a month from 2017-2023 (``ten_checkouts``), and (3) a dataset of items checked out at least 5 times a month from 2013-2023 (``five_checkouts``). I also plan on analyzing the checkout patterns in the average number of checkouts (``average_checkouts_per_Austen_book``), checkout data for specific books and its format-class during certain months (``most_checkouts_for_emma_digital``, ``most_checkouts_for_emma_physical``), year with the least number of checkouts for a book (``least_checkouts_for_lady_susan``), and total Emma checkouts from 2022 to 2023 (``emma_print_checkouts``). By looking at checkout data for certain books, I hope to gain insight into the popularity of Austen's most famous works in relation to time.
 
 ```{r summary info, echo=FALSE, warning = FALSE, message=FALSE}
 source("summary.R")
@@ -25,7 +28,7 @@ source("summary.R")
 ### Summary Information
 When working with this data, I chose to analyze it by a specific author, Jane Austen. I picked Jane Austen because she is a very famous author, and since two of the dataframes used were based on books checked out at least 5 or 10 times a month, I wanted to choose a popular author so that there would be sufficient data to work with since using data from just 2022 and 2023 is quite limited. The areas I wanted to analyze were things like the average checkouts per book to determine her most popular books, the month with the most "Emma" ebook checkouts, the month with the most "Emma" print book checkouts, the Checkout Year for the least checkouts for the book "Lady Susan," and the number of total Emma checkouts from 2022 to 2023.
 
-When finding these values, I obtained some interesting results for the month with the most "Emma print book" and the Checkout Year. When analyzing the most popular "Emma print book" checkout month, I received a value of 0, but this was because there were no print copies available - only digital. For digital, the most popular months were January and August. For the Checkout Year for the least checkouts for the book "Lady Susan," I had originally used (``all_checkouts``), but changed it to (``five_checkouts``) because it only showed 2022, as there were only two possible values originally. After changing it, I got 2016, 2017, and 2022.
+When finding these values, I obtained some interesting results for the month with the most "Emma print book" and the Checkout Year. When analyzing the most popular "Emma print book" checkout month, I received a value of 0, but this was because there were no physical copies available - only digital. For digital, the most popular months were January and August. For the Checkout Year for the least checkouts for the book "Lady Susan," I had originally used (``all_checkouts``), but changed it to (``five_checkouts``) because it only showed 2022, as there were only two possible values originally. After changing it, I got 2016, 2017, and 2022.
 
 For average checkouts per book, Emma was the most popular at a little over 39 checkouts, and Pride and Prejudice was the second most popular at around 37 checkouts. The least checked-out book was Raison et Sensibilité, which is the French version of her book Sense and Sensibility (the fourth most checked-out book). It is likely last because it is in French, and Seattle may not have a lot of people who prefer reading in French. I also analyzed the number of total Emma checkouts from 2022 to 2023 and obtained a total of 292.
 
@@ -47,21 +50,22 @@ There are some possible limitations to consider when examining this data, such a
 
 ### First Trends Over Time Chart
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("Chart1.R")}
 ```
 
-##### Purpose
+##### Purpose  
+This time series chart shows the total checkouts for Jane Austen books, categorized by title. The chart reveals that Pride and Prejudice was the most popular book by Austen in 2022, with September 2022 and January 2023 being the most popular months, with 239 checkouts. May 2022, with 132 checkouts, was the least popular month for Pride and Prejudice. The reasons for the spike may include people having more leisure time to read during holiday months, an increase in reading activities in January due to reading goals, or the book being commonly used as required reading in many US English classes.
 
 ### Second Trends Over Time Chart
 
-```{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, code = readLines("Chart2.R")}
 ```
 
 ##### Purpose
 
 ### Your Choice
 
-```{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, code = readLines("Chart3.R")}
 ```
 
 ##### Purpose
