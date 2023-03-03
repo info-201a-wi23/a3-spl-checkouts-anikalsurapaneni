@@ -1,86 +1,58 @@
 ---
 title: "A3: SPL Library Checkouts"
+author: "Anika Surapaneni"
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(tidyverse)
+library(dplyr)
+```
+
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+Using data from the Seattle Public Library, I will observe trends in Jane Austen's book checkouts from three datasets: (1) a dataset of all checkouts from 2022-2023 (``all_checkouts``), (2) a dataset of items checked out at least 10 times a month from 2017-2023 (``ten_checkouts``), and (3) a dataset of items checked out at least 5 times a month from 2013-2023 (``five_checkouts``). I also plan on analyzing the checkout patterns in the average number of checkouts (``average_checkouts_per_Austen_book``), checkout data for specific books and its format-class during certain months (``most_checkouts_for_emma_ebook``, ``most_checkouts_for_emma_print``), year with the least number of checkouts for a book (``least_checkouts_for_lady_susan``), and total Emma checkouts from 2022 to 2023 (``emma_print_checkouts``). By looking at checkout data for certain books, I hope to gain insight into the popularity of Austen's most famous works in relation to time.
+
+```{r summary info, echo=FALSE, message=FALSE}
+source("summary.R")
+```
 
 ### Summary Information
+When working with this data, I chose to analyze it by a specific author, Jane Austen. I picked Jane Austen because she is a very famous author, and since two of the dataframes used were based on books checked out at least 5 or 10 times a month, I wanted to choose a popular author so that there would be sufficient data to work with since using data from just 2022 and 2023 is quite limited. The areas I wanted to analyze were things like the average checkouts per book to determine her most popular books, the month with the most "Emma" ebook checkouts, the month with the most "Emma" print book checkouts, the Checkout Year for the least checkouts for the book "Lady Susan," and the number of total Emma checkouts from 2022 to 2023.
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+When finding these values, I obtained some interesting results for the month with the most "Emma print book" and the Checkout Year. When analyzing the most popular "Emma print book" checkout month, I received a value of 0, but this was because there were no print copies available - only digital. For digital, the most popular months were January and August. For the Checkout Year for the least checkouts for the book "Lady Susan," I had originally used (``all_checkouts``), but changed it to (``five_checkouts``) because it only showed 2022, as there were only two possible values originally. After changing it, I got 2016, 2017, and 2022.
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
-
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
-
-Feel free to calculate and report values that you find relevant.
+For average checkouts per book, Emma was the most popular at a little over 39 checkouts, and Pride and Prejudice was the second most popular at around 37 checkouts. The least checked-out book was Raison et Sensibilité, which is the French version of her book Sense and Sensibility (the fourth most checked-out book). It is likely last because it is in French, and Seattle may not have a lot of people who prefer reading in French. I also analyzed the number of total Emma checkouts from 2022 to 2023 and obtained a total of 292.
 
 ### The Dataset
 
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
-- What are possible limitations or problems with this data?   (at least 200 words)
+##### Who collected/published the data?  
+This data was published by the Seattle Public Library.
 
+##### What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?  
+The parameters of the data are UsageClass, CheckoutType, MaterialType, CheckoutYear, CheckoutMonth, Checkouts, Title, ISBN, Creator, Subjects, Publisher, and PublicationYear.
+##### How was the data collected or generated?  
+The data was collected by the Seattle Public Library storing data each time a person checks out a book. The data is usually updated monthly (with the last update being February 6, 2023).
+##### Why was the data collected?  
+The data was likely collected for inventory purposes, so they can order more popular books or shorten checkout durations for popular books during historically popular checkout months.
+##### What, if any, ethical questions do you need to consider when working with this data?  
+Since the Seattle Public Library is a government entity, there can be privacy concerns over the government having access to the reading trends of the public.
+##### What are possible limitations or problems with this data?   (at least 200 words)  
+There are some possible limitations to consider when examining this data, such as the time period it covers. As the data goes back to 2005, the original file was huge and quite hard to work with all at once. Therefore, each of the data frames used was condensed to checkouts made only between 2022-2023 (all), 2017-2023 (ten checkouts), or 2013-2023 (five checkouts), which cover a span of just a few years. Since I am working with data from a specific author, it makes looking at yearly data difficult. For example, in my (``least_checkouts_for_lady_susan``), I had originally used the (``all_checkouts``) data frame, but changed it to the (``five_checkouts``) data frame because the value just showed 2022 originally. Since there were only two possible years in (``all_checkouts``), it doesn't create unique/interesting analysis. Additionally, since the amount of data collected from each borrower is limited (due to ethical reasons), the scope of the data is limited and may not show some other interesting details. Some other challenges with this data are the risks of errors in the data. A few examples of this include unreturned books causing a decline in the number of checkouts recorded, books being checked out multiple times by the same person, or technical errors.
 
 ### First Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1.R")}
 ```
 
 ### Second Trends Over Time Chart
-
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
 
 ``````{r, echo = FALSE, code = readLines("chart2_example.R")}
 ```
 
 ### Your Choice
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
-
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
 ``````{r, echo = FALSE, code = readLines("chart2_example.R")}
 ```
-
-
