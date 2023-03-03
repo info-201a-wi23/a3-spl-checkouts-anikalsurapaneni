@@ -39,18 +39,22 @@ This data was published by the Seattle Public Library.
 
 ##### What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?  
 The parameters of the data are UsageClass, CheckoutType, MaterialType, CheckoutYear, CheckoutMonth, Checkouts, Title, ISBN, Creator, Subjects, Publisher, and PublicationYear.
+
 ##### How was the data collected or generated?  
 The data was collected by the Seattle Public Library storing data each time a person checks out a book. The data is usually updated monthly (with the last update being February 6, 2023).  
+
 ##### Why was the data collected?  
 The data was likely collected for inventory purposes, so they can order more popular books or shorten checkout durations for popular books during historically popular checkout months.  
+
 ##### What, if any, ethical questions do you need to consider when working with this data?  
 Since the Seattle Public Library is a government entity, there can be privacy concerns over the government having access to the reading trends of the public.  
+
 ##### What are possible limitations or problems with this data?   (at least 200 words)  
-There are some possible limitations to consider when examining this data, such as the time period it covers. As the data goes back to 2005, the original file was huge and quite hard to work with all at once. Therefore, each of the data frames used was condensed to checkouts made only between 2022-2023 (all), 2017-2023 (ten checkouts), or 2013-2023 (five checkouts), which cover a span of just a few years. Since I am working with data from a specific author, it makes looking at yearly data difficult. For example, in my (``least_checkouts_for_lady_susan``), I had originally used the (``all_checkouts``) data frame, but changed it to the (``five_checkouts``) data frame because the value just showed 2022 originally. Since there were only two possible years in (``all_checkouts``), it doesn't create unique/interesting analysis. Additionally, since the amount of data collected from each borrower is limited (due to ethical reasons), the scope of the data is limited and may not show some other interesting details. Some other challenges with this data are the risks of errors in the data. A few examples of this include unreturned books causing a decline in the number of checkouts recorded, books being checked out multiple times by the same person, or technical errors.
+There are some possible limitations to consider when examining this data, such as the time period it covers. As the data goes back to 2005, the original file was huge and quite hard to work with all at once. Therefore, each of the data frames used was condensed to checkouts made only between 2022-2023 (all), 2017-2023 (ten checkouts), or 2013-2023 (five checkouts), which cover a span of just a few years. Since I am working with data from a specific author, it makes looking at yearly data difficult. For example, in my (``least_checkouts_for_lady_susan``), I had originally used the (``all_checkouts``) data frame, but changed it to the (``five_checkouts``) data frame because the value just showed 2022 originally. Since there were only two possible years in (``all_checkouts``), it doesn't create unique/interesting analysis. Additionally, since the amount of data collected from each borrower is limited (due to ethical reasons), the scope of the data is limited and may not show some other interesting details. Some other challenges with this data are the risks of errors in the data. A few examples of this include unreturned books causing a decline in the number of checkouts recorded, books being checked out multiple times by the same person, or technical errors. Another limitation is that the number of copies available in the library is not shared. With this information, we would be able to further analyze the number of checkouts because it could be due to limited copies.
 
 ### First Trends Over Time Chart
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("Chart1.R")}
+```{r, echo = FALSE, warning = FALSE, message=FALSE, code = readLines("Chart1.R")}
 ```
 
 ##### Purpose  
@@ -58,10 +62,11 @@ This time series chart shows the total checkouts for Jane Austen books, categori
 
 ### Second Trends Over Time Chart
 
-```{r, echo = FALSE, warning = FALSE, code = readLines("Chart2.R")}
+```{r, echo = FALSE, warning = FALSE, message=FALSE, code = readLines("Chart2.R")}
 ```
 
 ##### Purpose
+This time series chart shows the Jane Austen book checkout count based on material type (e.g., book, song, movie, music, magazine). The chart reveals that the audiobook version has become one of the most popular forms of Austen's book consumption over time. There was a spike at the end of 2018 and early 2019, and it kept increasing until there was a sudden drop in June of 2020. It eventually picked back up in mid-2021 and has continued on an upward trend, with a few occasional dips. The ebook versions of her books have also become extremely popular, starting at the beginning of the pandemic. The physical book has been becoming less popular as it has been on a downward trend since 2013.
 
 ### Your Choice
 
@@ -69,3 +74,4 @@ This time series chart shows the total checkouts for Jane Austen books, categori
 ```
 
 ##### Purpose
+This stacked bar chart compares the number of checkouts from the books "Pride and Prejudiced" and "Pride and Prejudice (unabridged)". Since there are many different versions of the same book, I wanted to observe the difference in checkouts between each book to see if people preferred the full-unabridged text over the other. Given that this book is a classic, it is understandable that people interested in literature would want to read the unabridged version while those who are not would want to read the regular version. However, due to a limitation in the data that does not share the total number of copies available, it is not possible to determine if there are more checkouts due to there being more regular copies of the book or if it is because more people prefer the regular versions. Regarding the relationship to the checkout month, the unabridged version tends to have a consistent checkout count, while the regular version shows a little more fluctuation. Since there are more checkouts in January, there could be fewer copies available for people to check out in February, which could explain the dip in checkouts during that month. Something that also interested me was that in (``average_checkouts_per_Austen_book``), the unabridged version of most books tended to be more popular.
