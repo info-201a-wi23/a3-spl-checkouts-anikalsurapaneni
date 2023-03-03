@@ -9,13 +9,16 @@ knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(tidyverse)
 library(dplyr)
+
+five_checkouts <- read.csv("~/Documents/Info201code/a3-spl-checkouts-anikalsurapaneni/2013-2023-5-Checkouts-SPL.csv")
+all_checkouts <- read.csv("~/Documents/Info201code/a3-spl-checkouts-anikalsurapaneni/2022-2023-All-Checkouts-SPL-Data.csv")
 ```
 
 ### Introduction
 
 Using data from the Seattle Public Library, I will observe trends in Jane Austen's book checkouts from three datasets: (1) a dataset of all checkouts from 2022-2023 (``all_checkouts``), (2) a dataset of items checked out at least 10 times a month from 2017-2023 (``ten_checkouts``), and (3) a dataset of items checked out at least 5 times a month from 2013-2023 (``five_checkouts``). I also plan on analyzing the checkout patterns in the average number of checkouts (``average_checkouts_per_Austen_book``), checkout data for specific books and its format-class during certain months (``most_checkouts_for_emma_ebook``, ``most_checkouts_for_emma_print``), year with the least number of checkouts for a book (``least_checkouts_for_lady_susan``), and total Emma checkouts from 2022 to 2023 (``emma_print_checkouts``). By looking at checkout data for certain books, I hope to gain insight into the popularity of Austen's most famous works in relation to time.
 
-```{r summary info, echo=FALSE, message=FALSE}
+```{r summary info, echo=FALSE, warning = FALSE, message=FALSE}
 source("summary.R")
 ```
 
@@ -34,25 +37,31 @@ This data was published by the Seattle Public Library.
 ##### What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?  
 The parameters of the data are UsageClass, CheckoutType, MaterialType, CheckoutYear, CheckoutMonth, Checkouts, Title, ISBN, Creator, Subjects, Publisher, and PublicationYear.
 ##### How was the data collected or generated?  
-The data was collected by the Seattle Public Library storing data each time a person checks out a book. The data is usually updated monthly (with the last update being February 6, 2023).
+The data was collected by the Seattle Public Library storing data each time a person checks out a book. The data is usually updated monthly (with the last update being February 6, 2023).  
 ##### Why was the data collected?  
-The data was likely collected for inventory purposes, so they can order more popular books or shorten checkout durations for popular books during historically popular checkout months.
+The data was likely collected for inventory purposes, so they can order more popular books or shorten checkout durations for popular books during historically popular checkout months.  
 ##### What, if any, ethical questions do you need to consider when working with this data?  
-Since the Seattle Public Library is a government entity, there can be privacy concerns over the government having access to the reading trends of the public.
+Since the Seattle Public Library is a government entity, there can be privacy concerns over the government having access to the reading trends of the public.  
 ##### What are possible limitations or problems with this data?   (at least 200 words)  
 There are some possible limitations to consider when examining this data, such as the time period it covers. As the data goes back to 2005, the original file was huge and quite hard to work with all at once. Therefore, each of the data frames used was condensed to checkouts made only between 2022-2023 (all), 2017-2023 (ten checkouts), or 2013-2023 (five checkouts), which cover a span of just a few years. Since I am working with data from a specific author, it makes looking at yearly data difficult. For example, in my (``least_checkouts_for_lady_susan``), I had originally used the (``all_checkouts``) data frame, but changed it to the (``five_checkouts``) data frame because the value just showed 2022 originally. Since there were only two possible years in (``all_checkouts``), it doesn't create unique/interesting analysis. Additionally, since the amount of data collected from each borrower is limited (due to ethical reasons), the scope of the data is limited and may not show some other interesting details. Some other challenges with this data are the risks of errors in the data. A few examples of this include unreturned books causing a decline in the number of checkouts recorded, books being checked out multiple times by the same person, or technical errors.
 
 ### First Trends Over Time Chart
 
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
 ```
+
+##### Purpose
 
 ### Second Trends Over Time Chart
 
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, code = readLines("chart2_example.R")}
 ```
+
+##### Purpose
 
 ### Your Choice
 
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+```{r, echo = FALSE, code = readLines("chart2_example.R")}
 ```
+
+##### Purpose
