@@ -16,25 +16,25 @@ average_checkouts_per_Austen_book <- all_checkouts %>%
 
 average_checkouts_per_Austen_book
 
-# Month with the most checkouts for the eBook copy of "Emma"
-most_checkouts_for_emma_ebook <- all_checkouts %>%
+# Month with the most checkouts for the digital copy of "Emma"
+most_checkouts_for_emma_digital <- all_checkouts %>%
   filter(Creator == "Jane Austen", UsageClass == "Digital", Title == "Emma") %>%
   group_by(CheckoutMonth) %>%
   summarize(max_checkouts = max(Checkouts, na.rm = TRUE)) %>%
   filter(max_checkouts == max(max_checkouts)) %>%
   pull(CheckoutMonth)
 
-most_checkouts_for_emma_ebook
+most_checkouts_for_emma_digital
 
-# Month with the most checkouts for the print copy of "Emma"
-most_checkouts_for_emma_print <- all_checkouts %>%
+# Month with the most checkouts for the physical copy of "Emma"
+most_checkouts_for_emma_physical <- all_checkouts %>%
   filter(Creator == "Jane Austen" & UsageClass == "Physical" & Title == "Emma") %>%
   group_by(CheckoutMonth) %>%
   summarize(max_checkouts = max(Checkouts, na.rm = TRUE)) %>%
   filter(max_checkouts == max(max_checkouts)) %>%
   pull(CheckoutMonth)
 
-most_checkouts_for_emma_print
+most_checkouts_for_emma_physical
 
 # Checkout Year for the least checkouts for the book "Lady Susan"
 least_checkouts_for_lady_susan <- five_checkouts %>%
