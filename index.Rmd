@@ -58,14 +58,14 @@ This time series chart shows the total checkouts for Jane Austen books, categori
 
 ### Second Trends Over Time Chart
 
-```{r, echo = FALSE, code = readLines("Chart2.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("Chart2.R")}
 ```
 
 ##### Purpose
 
 ### Your Choice
 
-```{r, echo = FALSE, code = readLines("Chart3.R")}
+```{r, echo = FALSE, warning = FALSE, code = readLines("Chart3.R")}
 ```
 
 ##### Purpose
